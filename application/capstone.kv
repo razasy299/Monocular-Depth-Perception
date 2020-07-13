@@ -1,0 +1,502 @@
+#:kivy 1.10.0
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+#:import StringProperty kivy.properties
+<MyScreenManager>:
+    id: sm
+    transition: FadeTransition()
+    Logo:
+    Loading:
+    Welcome:
+    Background_new:
+    Goal_new:
+    Background:
+    Help:
+    Goal:
+    Architecture:
+    Requirements:
+    
+<Logo>:
+    name: 'Logo'
+    padding_x: 300
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        Image:
+            source: 'kivy_logo1.jpeg'
+            size_hint: 1,1
+
+<Architecture>:
+    canvas:
+        Color:
+            rgb: 1, 1, 1
+        Rectangle:
+            source: 'data/images/background.jpg'
+            size: self.size
+    name: 'Architecture'
+    BoxLayout:
+        orientation: 'vertical'
+        pos_hint: {'top': 1}
+        Back_ActionBar:
+            id: arch_back
+            pos_hint: {'top':1}
+        FloatLayout:
+            id: main_layout
+            Label:
+                id: arch_label
+                pos_hint: {'top':0.9}
+                text: 'Our Architecture'
+                color: (0.759,0.767,0.782,1)
+                font_size: '30sp'
+                size_hint_y: None
+                height: 50
+            Image:
+                id: arch_png 
+                size_hint: None,1
+                pos_hint: {'x':0.05,'top':1}
+                width: 900 
+                source: 'architecture1.png'
+
+<Help>:
+    canvas:
+        Color:
+            rgb: 1, 1, 1
+        Rectangle:
+            source: 'data/images/background.jpg'
+            size: self.size
+    name: 'Help'
+    BoxLayout:
+        orientation: 'vertical'
+        pos_hint: {'top': 1}
+        Back_ActionBar:
+            id: arch_back
+            pos_hint: {'top':1}
+        FloatLayout:
+            id: main_layout
+            Label:
+                id: arch_label
+                pos_hint: {'top':0.9}
+                text: 'Tutorial'
+                color: (0.759,0.767,0.782,1)
+                font_size: '30sp'
+                size_hint_y: None
+                height: 50
+            Image:
+                id: arch_png 
+                size_hint: None,1
+                pos_hint: {'x':0.05,'top':1}
+                width: 900 
+                source: 'help.png'
+<Requirements>:
+    canvas:
+        Color:
+            rgb: 1, 1, 1
+        Rectangle:
+            source: 'data/images/background.jpg'
+            size: self.size
+    name: 'Requirements'
+    BoxLayout:
+        orientation: 'vertical'
+        pos_hint: {'top': 1}
+        Back_ActionBar:
+            id: requirements_bar 
+            pos_hint: {'top':1}
+        FloatLayout:
+            id: main_layout
+            Label:
+                id: requirements_label
+                pos_hint: {'top':0.9}
+                text: 'Project Requirements'
+                color: (0.759,0.767,0.782,1)
+                font_size: '30sp'
+                size_hint_y: None
+                height: 50
+            Image:
+                id: requirements_png 
+                size_hint: None,1
+                pos_hint: {'x':0.05,'top':1}
+                width: 900 
+                source: 'requirements1.png'
+<Welcome>:
+    canvas:
+        Color:
+            rgb: 1, 1, 1
+        Rectangle:
+            source: 'data/images/background.jpg'
+            size: self.size
+    name: 'Welcome'
+    AnchorLayout:
+
+<Loading>:
+    canvas:
+        Color:
+            rgb: 1, 1, 1
+        Rectangle:
+            source: 'data/images/background.jpg'
+            size: self.size
+    name: 'Loading'
+    BoxLayout:
+        id: main_layout 
+        orientation: 'vertical'
+        pos_hint: {'top': 1}
+        SomeMenu_ActionBar:
+            id: action_bar
+            pos_hint: {'top':1}
+        FloatLayout:
+            id: main_layout
+            Label:
+                id: title
+                pos_hint: {'top':0.9}
+                text: 'Monocular Depth Perception'
+                font_size: '30sp'
+                color: (0.759,0.767,0.782,1)
+                size_hint_y: None
+                height: 50
+            Label:
+                id: input_text_box
+                pos_hint: {'x':0.05,'y':0.7}
+                text: 'Select image'
+                size_hint_x: None
+                width: 120
+                size_hint_y: None
+                height: 30
+            TextInput:
+                id: input_image
+                pos_hint: {'x':0.2,'y':0.7}
+                size_hint_y: None
+                size_hint_x: None
+                width: 280
+                height: 30
+                on_focus: root.show_load()
+                multiline: False
+            SmoothButton:
+                id: process
+                pos_hint: {'x':0.422,'y':0.37}
+                text: 'Generate'
+                size_hint_y: None
+                size_hint_x: None
+                width: 120
+                height: 30
+                back_color:(0.157,0.455,0.753,1.0)
+                on_release: root.change_image()
+            Image:
+                id: needs_processing 
+                size_hint: None,None
+                opacity: 1 
+                pos_hint: {'x':0.1,'y':0.2}
+                width: 256
+                height: 256
+                source: 'select.png'
+            Image:
+                id: depth_map_final
+                size_hint: None,None
+                width: 256
+                height: 256
+                opacity: 1 
+                pos_hint: {'x':0.6,'y':0.2}
+                source: 'select.png' 
+            Label:
+                id: select_image 
+                pos_hint: {'x':0.165,'y':0.37}
+                text: 'Select image'
+                size_hint_x: None
+                width: 120
+                size_hint_y: None
+                height: 30
+            Label:
+                id: wrong_input 
+                pos_hint: {'x':0.165,'y':0.37}
+                text: '             Invalid input.\nPlease see our requirements:\n      Design->Requirements'
+                opacity: 0
+                size_hint_x: None
+                width: 120
+                size_hint_y: None
+                height: 30
+            Label:
+                id: select_depth_map 
+                pos_hint: {'x':0.67,'y':0.37}
+                text: 'Depth_map'
+                size_hint_x: None
+                width: 120
+                size_hint_y: None
+                height: 30     
+            Slider:
+                id: my_slider
+                min: 0
+                max: 80 
+                step: 1
+                pos_hint: {'x':0.6,'y':0.09}
+                size_hint_x: None
+                size_hint_y: None
+                #disabled: True
+                on_touch_move: root.on_touch_move()
+                width: 250
+                opacity: 0
+            Label:
+                id: slider_label
+                pos_hint: {'x':0.81,'y':0.09}
+                size_hint_x: None
+                size_hint_y: None
+                text: str(my_slider.value)+ 'm'
+                opacity: 0
+            Label:
+                id: slider_text
+                pos_hint: {'x':0.49,'y':0.09}
+                size_hint_x: None
+                size_hint_y: None
+                text: 'Depth filter'
+                opacity: 0            
+             
+
+<Background_new>:
+    canvas:
+        Color:
+            rgb: 1, 1, 1
+        Rectangle:
+            source: 'data/images/background.jpg'
+            size: self.size
+    name: 'Background_new'
+    BoxLayout:
+        orientation: 'vertical'
+        pos_hint: {'top': 1}
+        Next_back_ActionBar:
+            id: action_bar 
+            pos_hint: {'top':1}
+        FloatLayout:
+            id: main_layout
+            size: self.size
+            Label:
+                id: background_label  
+                pos_hint: {'top':0.9}
+                text: 'Background and Motivation'
+                font_size: '30sp'
+                color: (0.759,0.767,0.782,1)
+                size_hint_y: None
+                height: 50
+            RstDocument:
+                id: document
+                size_hint_y: None
+                size_hint_x: None
+                base_font_size: 40
+                width: 800 
+                height: 500
+                text: 'dsadasd'
+                pos_hint: {'x':0.1,'y':0.05}
+                font_color: (1,1,1,1)
+                background_color: (0.086,0.102,0.106,1)    
+<Background>:
+    canvas:
+        Color:
+            rgb: 1, 1, 1
+        Rectangle:
+            source: 'data/images/background.jpg'
+            size: self.size
+    name: 'Background'
+    BoxLayout:
+        orientation: 'vertical'
+        pos_hint: {'top': 1}
+        Back_ActionBar:
+            id: action_bar 
+            pos_hint: {'top':1}
+        FloatLayout:
+            id: main_layout 
+            size: self.size
+            Label:
+                id: background_label
+                pos_hint: {'top':0.9}
+                text: 'Background and Motivation'
+                font_size: '30sp'
+                color: (0.759,0.767,0.782,1)
+                size_hint_y: None
+                height: 50
+            RstDocument:
+                id: document
+                size_hint_y: None
+                size_hint_x: None
+                base_font_size: 40
+                width: 800 
+                height: 500
+                text: 'dsadasd'
+                pos_hint: {'x':0.1,'y':0.05}
+                font_color: (1,1,1,1)
+                background_color: (0.086,0.102,0.106,1)
+<Goal_new>:
+    canvas:
+        Color:
+            rgb: 1, 1, 1
+        Rectangle:
+            source: 'data/images/background.jpg'
+            size: self.size
+    name: 'Goal_new'
+    BoxLayout:
+        orientation: 'vertical'
+        pos_hint: {'top': 1}
+        Next_ActionBar:
+            id: action_bar
+            pos_hint: {'top':1}
+        FloatLayout:
+            id: main_layout
+            size: self.size
+            Label:
+                id: goal_label 
+                pos_hint: {'top':0.9}
+                text: 'Project Goal'
+                font_size: '30sp'
+                color: (0.759,0.767,0.782,1)
+                size_hint_y: None
+                height: 50
+            RstDocument:
+                id: document
+                size_hint_y: None
+                size_hint_x: None
+                base_font_size: 40
+                width: 800 
+                height: 500
+                text: 'dsadasd'
+                pos_hint: {'x':0.1,'y':0.05}
+                font_color: (1,1,1,1)
+                background_color: (0.086,0.102,0.106,1)    
+<Goal>:
+    canvas:
+        Color:
+            rgb: 1, 1, 1
+        Rectangle:
+            source: 'data/images/background.jpg'
+            size: self.size
+    name: 'Goal'
+    BoxLayout:
+        orientation: 'vertical'
+        pos_hint: {'top': 1}
+        Back_ActionBar:
+            id: action_bar 
+            pos_hint: {'top':1}
+        FloatLayout:
+            id: main_layout
+            size: self.size
+            Label:
+                id: goal_label 
+                pos_hint: {'top':0.9}
+                text: 'Project Goal'
+                font_size: '30sp'
+                color: (0.759,0.767,0.782,1)
+                size_hint_y: None
+                height: 50
+            RstDocument:
+                id: document
+                size_hint_y: None
+                size_hint_x: None
+                base_font_size: 40
+                width: 800 
+                height: 500
+                text: 'dsadasd'
+                pos_hint: {'x':0.1,'y':0.05}
+                font_color: (1,1,1,1)
+                background_color: (0.086,0.102,0.106,1)
+	
+<LoadDialog>:
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserListView:
+            id: filechooser
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+            Button:
+                text: "Load"
+                on_release: root.load(filechooser.path, filechooser.selection)    
+
+<SmoothButton@Button>:
+    background_color: (0,0,0,0)
+    background_normal: ''
+    back_color: (1,0,1,1)
+    border_radius: [18]
+    canvas.before:
+        Color:
+            rgba:self.back_color
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: self.border_radius
+
+<ScrollableLabel@Label>:
+    size_hint_y: None
+    height: self.texture_size[1]
+    text_size: self.width,None
+    text: root.text
+
+<SomeMenu_ActionBar@ActionBar>:
+    ActionView:
+        id: ActionView
+        HiddenIcon_ActionPrevious:
+        ActionGroup:
+            id: App_ActionGroup
+            mode: 'spinner'
+            text: 'Design'
+            ActionButton:
+                text: 'Architecture'
+                on_release: app.root.current = 'Architecture'
+            ActionButton:
+                text: 'Requirements'
+                on_release:  app.root.current = 'Requirements'
+        ActionGroup:
+            id: App_ActionGroup
+            mode: 'spinner'
+            text: 'App'
+            ActionButton:
+                text: 'Settings'
+                on_press: app.open_settings()
+            ActionButton:
+                text: 'Quit'
+                on_press: app.get_running_app().stop()
+        ActionButton:
+            id: back_back
+            text: 'Background'
+            on_release: app.root.current = 'Background'
+        ActionButton:
+            id: back_back
+            text: 'Project Goal'
+            on_release: app.root.current = 'Goal'
+        ActionButton:
+            id: back_back
+            text: 'Help'
+            on_release: app.root.current = 'Help'
+
+<Back_ActionBar@ActionBar>:
+    ActionView:
+        id: ActionView
+        HiddenIcon_ActionPrevious:
+        ActionButton:
+            pos_hint: {'right':1}
+            text: 'Back'
+            on_release: app.root.current = 'Loading'
+
+<Next_ActionBar@ActionBar>:
+    ActionView:
+        id: ActionView
+        HiddenIcon_ActionPrevious:
+        ActionButton:
+            pos_hint: {'right':1}
+            text: 'Next'
+            on_release: app.root.current = 'Loading'
+
+<Next_back_ActionBar@ActionBar>:
+    ActionView:
+        id: ActionView
+        HiddenIcon_ActionPrevious:
+        ActionButton:
+            pos_hint: {'right':1}
+            text: 'Next'
+            on_release: app.root.current = 'Goal_new'
+
+<HiddenIcon_ActionPrevious@ActionPrevious>:
+    title: '    '  
+    with_previous: False
+    app_icon: 'kivy_logo1.jpeg'
+    app_icon_width: 24 
+    app_icon_height: 24
+    size_hint_x: None
+    width: len(self.title) * 10
